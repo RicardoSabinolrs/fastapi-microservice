@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-env
+  namespace: sabino-labs
+data:
+  HOST: "0.0.0.0"
+  PORT: "8001"
+  ROOT_PATH: "/"
+  APP_MODULE: "app.main:app"
+  POSTGRES_SERVER: "localhost"
+  POSTGRES_USER: "sabinolabs"
+  POSTGRES_DB: "beer_db"
+  BACKEND_CORS_ORIGINS: "[\"http://localhost\", \"http://localhost:4200\"]"

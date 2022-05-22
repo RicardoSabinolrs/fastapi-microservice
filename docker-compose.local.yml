@@ -1,0 +1,13 @@
+version: "3"
+services:
+  api:
+    container_name: "beer-api"
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./src/app:/app
+    environment:
+      - BACKEND_CORS_ORIGINS=["http://localhost", "http://localhost:4200", "http://localhost:3000", "http://localhost:8080", "https://localhost", "https://localhost:4200", "https://localhost:3000", "https://localhost:8080"]

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: beer-api
+    namespace: sabino-labs
+spec:
+    type: ClusterIP
+    ports:
+    - port: 8001
+    selector:
+        app: beer-api

@@ -1,0 +1,1 @@
+from .beer import Beer
