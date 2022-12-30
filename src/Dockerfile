@@ -1,40 +1,40 @@
-FROM python:3.9
+# Pull official latest Python Docker image (Pulished with version 3.11.0)
+FROM --platform=linux/amd64 python:latest
 
-# create the app user
-RUN addgroup --system app && adduser --system --group app
+# Set the working directory
+WORKDIR /usr/src
 
-WORKDIR /app/
-
+# Set up Python behaviour
 ENV PYTHONDONTWRITEBYTECODE 1
-
 ENV PYTHONUNBUFFERED 1
-ENV ENVIRONMENT prod
-ENV TESTING 0
+ENV VIRTUAL_ENV=/opt/venv
 
-# Install Poetry
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | POETRY_HOME=/opt/poetry python && \
-    cd /usr/local/bin && \
-    ln -s /opt/poetry/bin/poetry && \
-    poetry config virtualenvs.create false
+# Switch on virtual environment
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-# Copy poetry.lock* in case it doesn't exist in the repo
-COPY ./app/pyproject.toml ./app/poetry.lock* /app/
+# Set the server port
+EXPOSE 8000
 
-# Allow installing dev dependencies to run tests
-ARG INSTALL_DEV=false
+# Install system dependencies
+RUN apt-get update \
+  && apt-get -y install netcat gcc postgresql \
+  && apt-get clean
 
-RUN bash -c "if [ $INSTALL_DEV == 'true' ] ; then poetry install --no-root ; else poetry install --no-root --no-dev ; fi"
+# Install Python dependencies
+RUN pip install --upgrade pip
+COPY requirements.txt ./
+RUN pip3 install -r requirements.txt
 
-COPY ./app /app
-RUN chmod +x run.sh
+# Copy all files
+COPY .. .
 
-ENV PYTHONPATH=/app
+# Copy entrypoint.sh for auto connection with account_db service
+COPY entrypoint.sh .
+RUN chmod +x /usr/src/entrypoint.sh
 
-# chown all the files to the app user
-RUN chown -R app:app $HOME
+# Execute entrypoint.sh
+ENTRYPOINT ["/usr/src/entrypoint.sh" ]
 
-# change to the app user
-USER app
-
-# Run the run script and then will start Uvicorn
-CMD ["./run.sh"]
+# Start up the app server
+CMD uvicorn src.main:app --reload --workers 4 --host 0.0.0.0 --port 8000
