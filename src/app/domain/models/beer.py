@@ -14,10 +14,10 @@ class Beer(Base):
     name: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(
         sqlalchemy.String(length=200), nullable=False, unique=False
     )
-    ibu = SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=5), nullable=False)
-    style = SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=200), nullable=False)
-    description = SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=200), nullable=False)
-    alcohol_tenor = SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=5), nullable=False)
+    ibu: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=5), nullable=False)
+    style: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=200), nullable=False)
+    description: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=200), nullable=False)
+    alcohol_tenor: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=5), nullable=False)
     created_at: SQLAlchemyMapped[datetime.datetime] = sqlalchemy_mapped_column(
         sqlalchemy.DateTime(timezone=True), nullable=False, server_default=sqlalchemy_functions.now()
     )
@@ -26,5 +26,3 @@ class Beer(Base):
         nullable=True,
         server_onupdate=sqlalchemy.schema.FetchedValue(for_update=True),
     )
-
-    __mapper_args__ = {"eager_defaults": True}

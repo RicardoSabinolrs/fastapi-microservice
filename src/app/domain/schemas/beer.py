@@ -8,17 +8,6 @@ class BeerBase(BaseSchemaModel):
     description: str
     alcohol_tenor: str
 
-    class Config:
-        schema_extra = {
-            "example": {
-                "name": "Heineken",
-                "ibu": 19,
-                "style": "Pale Lager",
-                "description": "Pure Malt Lager",
-                "alcohol_tenor": "5,0%"
-            }
-        }
-
 
 class BeerInCreate(BeerBase):
     ...

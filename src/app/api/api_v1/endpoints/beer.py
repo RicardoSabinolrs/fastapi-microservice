@@ -17,9 +17,9 @@ router = APIRouter()
     response_model=Sequence[Beer],
     status_code=HTTP_200_OK
 )
-def read_beers(
+async def read_beers(
         beer_repo: BeerCRUDRepository = Depends(get_repository(repo_type=BeerCRUDRepository)),
-) -> Sequence[Beer]:
+):
     """
     Get All Beers.
     """
@@ -35,7 +35,7 @@ def read_beers(
 async def create_beer(
         beer_create: BeerInCreate,
         beer_repo: BeerCRUDRepository = Depends(get_repository(repo_type=BeerCRUDRepository)),
-) -> Beer:
+):
     """
     Create new Beer.
     """
@@ -50,11 +50,11 @@ async def create_beer(
     response_model=Beer,
     status_code=HTTP_201_CREATED
 )
-def update_beer(
+async def update_beer(
         id: int,
         beer_update: BeerInUpdate,
         beer_repo: BeerCRUDRepository = Depends(get_repository(repo_type=BeerCRUDRepository)),
-) -> Beer:
+):
     """
     Update a Beer.
     """
@@ -70,10 +70,10 @@ def update_beer(
     response_model=Beer,
     status_code=HTTP_200_OK
 )
-def read_beer(
+async def read_beer(
         id: int,
         beer_repo: BeerCRUDRepository = Depends(get_repository(repo_type=BeerCRUDRepository)),
-) -> Beer:
+):
     """
     Get Beer by ID.
     """
@@ -85,7 +85,7 @@ def read_beer(
     name="beer:delete",
     status_code=HTTP_204_NO_CONTENT
 )
-def delete_beer(
+async def delete_beer(
         id: int,
         beer_repo: BeerCRUDRepository = Depends(get_repository(repo_type=BeerCRUDRepository)),
 ) -> str:
