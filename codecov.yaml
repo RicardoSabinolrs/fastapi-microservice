@@ -1,0 +1,14 @@
+coverage:
+  status:
+    project: False
+    patch: False
+
+flag_management:
+  individual_flags:
+    - name: src
+      paths:
+        - src/
+      statuses:
+        - type: project
+          target: 60%
+          threshold: 1%
