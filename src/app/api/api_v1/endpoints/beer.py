@@ -19,9 +19,6 @@ router = APIRouter()
 async def read_beers(
         beer_repo: BeerCRUDRepository = Depends(get_repository(repo_type=BeerCRUDRepository)),
 ):
-    """
-    Get All Beers.
-    """
     return await beer_repo.read_beers()
 
 
@@ -35,9 +32,7 @@ async def create_beer(
         new_beer: BeerInCreate,
         beer_repo: BeerCRUDRepository = Depends(get_repository(repo_type=BeerCRUDRepository)),
 ) -> BeerInResponse:
-    """
-    Create new Beer.
-    """
+
     new_beer = await beer_repo.create_beer(beer_create=new_beer)
 
     return BeerInResponse(
@@ -63,9 +58,7 @@ async def update_beer(
         beer_update: BeerInUpdate,
         beer_repo: BeerCRUDRepository = Depends(get_repository(repo_type=BeerCRUDRepository)),
 ) -> BeerInResponse:
-    """
-    Update a Beer.
-    """
+
     updated_beer = await beer_repo.update_beer_by_id(
         id=id,
         beer_update=beer_update
@@ -93,9 +86,7 @@ async def read_beer(
         id: int,
         beer_repo: BeerCRUDRepository = Depends(get_repository(repo_type=BeerCRUDRepository)),
 ) -> BeerInResponse:
-    """
-    Get Beer by ID.
-    """
+
     beer_read = await beer_repo.read_beer_by_id(id=id)
 
     return BeerInResponse(
@@ -119,7 +110,5 @@ async def delete_beer(
         id: int,
         beer_repo: BeerCRUDRepository = Depends(get_repository(repo_type=BeerCRUDRepository)),
 ) -> str:
-    """
-    Get Beer by ID.
-    """
+
     return await beer_repo.delete_beer_by_id(id=id)
