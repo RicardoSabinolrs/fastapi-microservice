@@ -16,8 +16,7 @@ class BeerCRUDRepository(BaseCRUDRepository):
             ibu=beer_create.ibu,
             style=beer_create.style,
             description=beer_create.description,
-            alcohol_tenor=beer_create.alcohol_tenor,
-            is_logged_in=True
+            alcohol_tenor=beer_create.alcohol_tenor
         )
 
         self.async_session.add(instance=new_beer)
@@ -53,15 +52,15 @@ class BeerCRUDRepository(BaseCRUDRepository):
         update_stmt = sqlalchemy.update(table=Beer).where(Beer.id == update_beer.id).values(updated_at=sqlalchemy_functions.now())
 
         if new_beer_data["name"]:
-            update_stmt = update_stmt.values(username=new_beer_data["name"])
+            update_stmt = update_stmt.values(name=new_beer_data["name"])
         if new_beer_data["ibu"]:
-            update_stmt = update_stmt.values(username=new_beer_data["ibu"])
+            update_stmt = update_stmt.values(ibu=new_beer_data["ibu"])
         if new_beer_data["style"]:
-            update_stmt = update_stmt.values(username=new_beer_data["style"])
+            update_stmt = update_stmt.values(style=new_beer_data["style"])
         if new_beer_data["description"]:
-            update_stmt = update_stmt.values(username=new_beer_data["description"])
+            update_stmt = update_stmt.values(description=new_beer_data["description"])
         if new_beer_data["alcohol_tenor"]:
-            update_stmt = update_stmt.values(username=new_beer_data["alcohol_tenor"])
+            update_stmt = update_stmt.values(alcohol_tenor=new_beer_data["alcohol_tenor"])
 
         await self.async_session.execute(statement=update_stmt)
         await self.async_session.commit()

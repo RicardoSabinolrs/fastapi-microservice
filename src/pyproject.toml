@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "fastapi-microservice"
 version = "0.0.1"
-description = "A comprehensive template to start a real-world quality project."
+description = "This project is intended to be part of a reference architecture for microservices with FastAPI."
 authors = [
     { name = "Luis Ricardo Sabino", email = "ricardosabinolrs@gmail.com" },
 ]
