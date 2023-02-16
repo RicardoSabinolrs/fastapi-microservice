@@ -4,7 +4,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.db.session import SessionLocal
-from app.main import app
+from main import app
 
 
 @pytest.fixture(scope="session")

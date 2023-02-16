@@ -103,12 +103,10 @@ async def read_beer(
 
 @router.delete(
     "/{id}",
-    name="beer:delete",
-    status_code=HTTP_204_NO_CONTENT
+    name="beer:delete"
 )
 async def delete_beer(
         id: int,
         beer_repo: BeerCRUDRepository = Depends(get_repository(repo_type=BeerCRUDRepository)),
 ) -> str:
-
     return await beer_repo.delete_beer_by_id(id=id)

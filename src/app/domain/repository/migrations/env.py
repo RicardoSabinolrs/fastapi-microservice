@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncEngine
 from sqlalchemy.pool import NullPool as SQLAlchemyNullPool
 
 from app.infra.database.table import Base
-from app.infra.database.database import async_db
+from app.infra.database.session import async_db
 
 config = context.config
 config.set_main_option(name="sqlalchemy.url", value=str(async_db.set_async_db_uri))
@@ -58,7 +58,7 @@ async def run_migrations_online() -> None:
     """
     connectable = AsyncEngine(
         engine_from_config(
-            config.get_section(config.config_ini_section),  # type: ignore
+            config.get_section(config.config_ini_section),
             prefix="sqlalchemy.",
             poolclass=SQLAlchemyNullPool,
             future=True,

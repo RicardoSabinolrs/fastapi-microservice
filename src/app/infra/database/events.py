@@ -5,7 +5,7 @@ from sqlalchemy.dialects.postgresql.asyncpg import AsyncAdapt_asyncpg_connection
 from sqlalchemy.ext.asyncio import AsyncConnection
 from sqlalchemy.pool.base import _ConnectionRecord
 
-from app.infra.database.database import async_db
+from app.infra.database.session import async_db
 from app.infra.database.table import Base
 
 

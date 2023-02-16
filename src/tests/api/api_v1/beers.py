@@ -1,8 +1,7 @@
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from infra.settings.config import settings
-from domain.models.beer_helper import create_random_beer
+from app.infra.settings.manager import settings
 
 
 def test_create_beer(

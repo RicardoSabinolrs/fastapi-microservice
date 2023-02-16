@@ -20,7 +20,7 @@ registry-login:
 	docker login
 
 tunnel:
-	kubectl port-forward $(API) -n beer-api 8001:8001
+	kubectl port-forward $(API) -n beer-api 8000:8000
 
 local-test:
 	docker-compose -f docker-compose.local.yml up --build

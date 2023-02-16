@@ -7,7 +7,7 @@ __pycache__
 *.md
 env
 .dockerignore
-src/Dockerfile
+Dockerfile
 Dockerfile.prod
 docker-compose.yaml
 .eslintrc.js

@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import (
     AsyncSession as SQLAlchemyAsyncSession,
 )
 
-from app.infra.database.database import async_db
+from app.infra.database.session import async_db
 
 
 async def get_async_session() -> typing.AsyncGenerator[SQLAlchemyAsyncSession, None]:
