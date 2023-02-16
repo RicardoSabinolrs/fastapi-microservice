@@ -12,13 +12,13 @@ from app.infra.settings.manager import settings
 class AsyncDatabase:
     def __init__(self):
         self.postgres_uri: pydantic.PostgresDsn = pydantic.PostgresDsn(
-            url=f"{settings.DB_POSTGRES_SCHEMA}:"
-                f"//{settings.DB_POSTGRES_USENRAME}:"
+            url="postgresql:"
+                f"//{settings.DB_POSTGRES_USERNAME}:"
                 f"{settings.DB_POSTGRES_PASSWORD}@"
                 f"{settings.DB_POSTGRES_HOST}:"
                 f"{settings.DB_POSTGRES_PORT}/"
                 f"{settings.DB_POSTGRES_NAME}",
-            scheme=settings.DB_POSTGRES_SCHEMA,
+            scheme=f"{settings.DB_POSTGRES_SCHEMA}",
         )
         self.async_engine: SQLAlchemyAsyncEngine = create_sqlalchemy_async_engine(
             url=self.set_async_db_uri,
@@ -27,6 +27,7 @@ class AsyncDatabase:
             max_overflow=settings.DB_POOL_OVERFLOW,
             poolclass=SQLAlchemyQueuePool,
         )
+        self.async_engine.execution_options(schema_translate_map=settings.DB_POSTGRES_SCHEMA)
         self.async_session: SQLAlchemyAsyncSession = SQLAlchemyAsyncSession(bind=self.async_engine)
         self.pool: SQLAlchemyPool = self.async_engine.pool
 

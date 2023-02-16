@@ -1,5 +1,5 @@
 # Pull official latest Python Docker image (Pulished with version 3.11.0)
-FROM --platform=linux/amd64 python:latest
+FROM --platform=linux/amd64 python:3.10
 
 # Set up Python behaviour
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -17,11 +17,13 @@ RUN apt-get update \
 
 # Install Python dependencies
 RUN pip install --upgrade pip
-COPY requirements.txt ./
+COPY src/requirements.txt ./
 RUN pip3 install -r requirements.txt
 
 # Copy all files
-COPY ./src ./opt/
+WORKDIR /opt
+
+COPY . .
 
 WORKDIR /opt/src
 

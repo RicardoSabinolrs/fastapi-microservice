@@ -7,7 +7,7 @@ flag_management:
   individual_flags:
     - name: src
       paths:
-        - src/
+        - src/app
       statuses:
         - type: project
           target: 60%

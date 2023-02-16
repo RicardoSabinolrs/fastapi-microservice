@@ -24,22 +24,22 @@ class AppBaseSettings(pydantic.BaseSettings):
     OPENAPI_PREFIX: str = ""
 
     DB_POSTGRES_HOST: str = decouple.config("POSTGRES_HOST", cast=str)
-    DB_MAX_POOL_CON: int = decouple.config("DB_MAX_POOL_CON", cast=int)
+    DB_MAX_POOL_CON: int = decouple.config("DB_MAX_POOL_CON", cast=int, default=80)
     DB_POSTGRES_NAME: str = decouple.config("POSTGRES_DB", cast=str)
     DB_POSTGRES_PASSWORD: str = decouple.config("POSTGRES_PASSWORD", cast=str)
-    DB_POOL_SIZE: int = decouple.config("DB_POOL_SIZE", cast=int)
-    DB_POOL_OVERFLOW: int = decouple.config("DB_POOL_OVERFLOW", cast=int)
+    DB_POOL_SIZE: int = decouple.config("DB_POOL_SIZE", cast=int, default=100)
+    DB_POOL_OVERFLOW: int = decouple.config("DB_POOL_OVERFLOW", cast=int, default=20)
     DB_POSTGRES_PORT: int = decouple.config("POSTGRES_PORT", cast=int)
     DB_POSTGRES_SCHEMA: str = decouple.config("POSTGRES_SCHEMA", cast=str)
-    DB_TIMEOUT: int = decouple.config("DB_TIMEOUT", cast=int)
-    DB_POSTGRES_USENRAME: str = decouple.config("POSTGRES_USERNAME", cast=str)
+    DB_TIMEOUT: int = decouple.config("DB_TIMEOUT", cast=int, default=5)
+    DB_POSTGRES_USERNAME: str = decouple.config("POSTGRES_USER", cast=str)
 
     IS_DB_ECHO_LOG: bool = decouple.config("IS_DB_ECHO_LOG", cast=bool)
     IS_DB_FORCE_ROLLBACK: bool = decouple.config("IS_DB_FORCE_ROLLBACK", cast=bool)
     IS_DB_EXPIRE_ON_COMMIT: bool = decouple.config("IS_DB_EXPIRE_ON_COMMIT", cast=bool)
 
-    API_TOKEN: str = decouple.config("API_TOKEN", cast=str)
-    AUTH_TOKEN: str = decouple.config("AUTH_TOKEN", cast=str)
+    API_TOKEN: str = decouple.config("API_TOKEN", cast=str, default='1232')
+    AUTH_TOKEN: str = decouple.config("AUTH_TOKEN", cast=str, default='1233')
     JWT_TOKEN_PREFIX: str = decouple.config("JWT_TOKEN_PREFIX", cast=str)
     JWT_SECRET_KEY: str = decouple.config("JWT_SECRET_KEY", cast=str)
     JWT_SUBJECT: str = decouple.config("JWT_SUBJECT", cast=str)
@@ -50,13 +50,13 @@ class AppBaseSettings(pydantic.BaseSettings):
 
     IS_ALLOWED_CREDENTIALS: bool = decouple.config("IS_ALLOWED_CREDENTIALS", cast=bool)
     ALLOWED_ORIGINS: list[str] = [
-        "http://localhost:3000",  # React default port
+        "http://localhost:3000",
         "http://0.0.0.0:3000",
-        "http://127.0.0.1:3000",  # React docker port
+        "http://127.0.0.1:3000",
         "http://127.0.0.1:3001",
-        "http://localhost:5173",  # Qwik default port
+        "http://localhost:5173",
         "http://0.0.0.0:5173",
-        "http://127.0.0.1:5173",  # Qwik docker port
+        "http://127.0.0.1:5173",
         "http://127.0.0.1:5174",
     ]
     ALLOWED_METHODS: list[str] = ["*"]

@@ -48,5 +48,3 @@ spec:
             - name: beer-api
               containerPort: 8001
               protocol: TCP
-          command: [ "/bin/sh","-c" ]
-          args: [ "./entrypoint.sh" ]
