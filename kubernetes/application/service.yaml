@@ -3,6 +3,8 @@ kind: Service
 metadata:
     name: beer-api
     namespace: sabino-labs
+    annotations:
+        external-dns.alpha.kubernetes.io/hostname: "beer-api.sabino.labs.com"
 spec:
     type: ClusterIP
     ports:

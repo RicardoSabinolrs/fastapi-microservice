@@ -5,7 +5,7 @@ from sqlalchemy.sql import functions as sqlalchemy_functions
 
 from app.crosscutting.exceptions.database import EntityDoesNotExist
 from app.domain.models.beer import Beer
-from app.domain.repository.crud.base import BaseCRUDRepository
+from app.domain.repository.base import BaseCRUDRepository
 from app.domain.schemas.beer import BeerInCreate, BeerInUpdate
 
 

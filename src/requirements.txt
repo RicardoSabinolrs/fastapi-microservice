@@ -28,6 +28,6 @@ SQLAlchemy
 trio
 uvicorn
 requests
-starlette-prometheus
+starlette_exporter
 starlette
 pydantic

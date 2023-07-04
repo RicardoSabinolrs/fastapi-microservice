@@ -6,7 +6,7 @@ from sqlalchemy.sql import functions as sqlalchemy_functions
 from app.crosscutting.exceptions.database import EntityAlreadyExists, EntityDoesNotExist
 from app.crosscutting.exceptions.password import PasswordDoesNotMatch
 from app.domain.models.account import Account
-from app.domain.repository.crud.base import BaseCRUDRepository
+from app.domain.repository.base import BaseCRUDRepository
 from app.domain.schemas.account import AccountInCreate, AccountInLogin, AccountInUpdate
 from app.infra.security.hashing.password import pwd_generator
 from app.infra.security.verifications.credentials import credential_verifier

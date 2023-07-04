@@ -5,8 +5,8 @@ from sqlalchemy.ext.asyncio import (
     AsyncSession as SQLAlchemyAsyncSession,
 )
 
-from app.api.api_v1.deps.session import get_async_session
-from app.domain.repository.crud.base import BaseCRUDRepository
+from app.infra.database.async_session import get_async_session
+from app.domain.repository.base import BaseCRUDRepository
 
 
 def get_repository(

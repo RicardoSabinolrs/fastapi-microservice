@@ -5,46 +5,38 @@ metadata:
   namespace: sabino-labs
   labels:
     app: beer-api
-    component: beer-api
 spec:
   replicas: 1
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
   selector:
     matchLabels:
       app: beer-api
-      component: beer-api
   template:
     metadata:
       labels:
         app: beer-api
-        component: beer-api
     spec:
       restartPolicy: Always
       containers:
         - name: beer-api
           image: sabinolabs/beer-api:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           envFrom:
             - configMapRef:
                 name: config-env
           env:
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: beer-api-secret
-                key: secret
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: beer-api-secret
+                  key: secret
           resources:
             limits:
-              cpu: 400m
-              memory: 700Mi
+              cpu: "400m"
+              memory: "700Mi"
             requests:
-              cpu: 300m
-              memory: 500Mi
+              cpu: "300m"
+              memory: "500Mi"
           ports:
-            - name: beer-api
+            - name: http
               containerPort: 8001
               protocol: TCP

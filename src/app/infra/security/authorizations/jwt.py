@@ -23,7 +23,6 @@ class JWTGenerator:
 
         if expires_delta:
             expire = datetime.datetime.utcnow() + expires_delta
-
         else:
             expire = datetime.datetime.utcnow() + datetime.timedelta(minutes=settings.JWT_MIN)
 

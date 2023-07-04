@@ -11,13 +11,15 @@ RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # Install system dependencies
-RUN apt-get update \
+RUN apt-get update && apt-get install -y apt-transport-https \
   && apt-get -y install netcat gcc postgresql \
   && apt-get clean
 
 # Install Python dependencies
 RUN pip install --upgrade pip
+
 COPY src/requirements.txt ./
+
 RUN pip3 install -r requirements.txt
 
 # Copy all files

@@ -3,8 +3,8 @@ from typing import Sequence
 from fastapi import APIRouter, Depends
 from starlette.status import HTTP_200_OK, HTTP_201_CREATED
 
-from app.api.api_v1.deps.repository import get_repository
-from app.domain.repository.crud.beer import BeerCRUDRepository
+from app.domain.repository.dependency import get_repository
+from app.domain.repository.beer import BeerCRUDRepository
 from app.domain.schemas.beer import BeerInCreate, BeerInUpdate, BeerInResponse
 
 router = APIRouter()

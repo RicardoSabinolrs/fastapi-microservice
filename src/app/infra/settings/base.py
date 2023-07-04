@@ -4,7 +4,9 @@ import pathlib
 import decouple
 import pydantic
 
-ROOT_DIR: pathlib.Path = pathlib.Path(__file__).parent.parent.parent.parent.parent.resolve()
+ROOT_DIR: pathlib.Path = pathlib.Path(
+    __file__
+).parent.parent.parent.parent.parent.resolve()
 
 
 class AppBaseSettings(pydantic.BaseSettings):

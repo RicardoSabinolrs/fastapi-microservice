@@ -7,8 +7,8 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import AsyncEngine
 from sqlalchemy.pool import NullPool as SQLAlchemyNullPool
 
-from app.infra.database.table import Base
-from app.infra.database.session import async_db
+from app.infra.database.async_engine_postgresql import async_db
+from app.infra.database.metadata import Base
 
 config = context.config
 config.set_main_option(name="sqlalchemy.url", value=str(async_db.set_async_db_uri))

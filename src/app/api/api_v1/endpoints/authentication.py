@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Depends
 from starlette.status import HTTP_201_CREATED, HTTP_202_ACCEPTED
 
-from app.api.api_v1.deps.repository import get_repository
+from app.domain.repository.dependency import get_repository
 from app.crosscutting.exceptions.database import EntityAlreadyExists
 from app.crosscutting.exceptions.http.exc_400 import (
     http_exc_400_credentials_bad_signin_request,
     http_exc_400_credentials_bad_signup_request,
 )
-from app.domain.repository.crud.account import AccountCRUDRepository
+from app.domain.repository.account import AccountCRUDRepository
 from app.domain.schemas.account import AccountInCreate, AccountInLogin, AccountInResponse, AccountWithToken
 from app.infra.security.authorizations.jwt import jwt_generator
 
