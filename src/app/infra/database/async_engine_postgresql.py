@@ -4,6 +4,8 @@ from sqlalchemy.ext.asyncio import (
     AsyncSession as SQLAlchemyAsyncSession,
     create_async_engine as create_sqlalchemy_async_engine,
 )
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import Pool as SQLAlchemyPool, QueuePool as SQLAlchemyQueuePool
 
 from app.infra.settings.manager import settings
@@ -13,7 +15,7 @@ class AsyncDatabase:
     def __init__(self):
         self.postgres_uri: pydantic.PostgresDsn = pydantic.PostgresDsn(
             url="postgresql:"
-                f"//{settings.DB_POSTGRES_USERNAME}:"
+                f"//{settings.DB_POSTGRES_USENRAME}:"
                 f"{settings.DB_POSTGRES_PASSWORD}@"
                 f"{settings.DB_POSTGRES_HOST}:"
                 f"{settings.DB_POSTGRES_PORT}/"
@@ -41,6 +43,13 @@ class AsyncDatabase:
             self.postgres_uri.replace("postgresql://", "postgresql+asyncpg://")
             if self.postgres_uri
             else self.postgres_uri
+        )
+
+    def create_async_session(self) -> AsyncSession:
+        return sessionmaker(
+            bind=self.async_engine,
+            class_=AsyncSession,
+            expire_on_commit=False,
         )
 
 

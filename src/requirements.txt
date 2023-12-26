@@ -31,3 +31,5 @@ requests
 starlette_exporter
 starlette
 pydantic
+starlette-prometheus
+pydantic-settings

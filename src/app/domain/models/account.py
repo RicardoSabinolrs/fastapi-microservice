@@ -4,7 +4,7 @@ import sqlalchemy
 from sqlalchemy.orm import Mapped as SQLAlchemyMapped, mapped_column as sqlalchemy_mapped_column
 from sqlalchemy.sql import functions as sqlalchemy_functions
 
-from app.infra.database.metadata import Base
+from app.infra.database.metadata_orm import Base
 
 
 class Account(Base):

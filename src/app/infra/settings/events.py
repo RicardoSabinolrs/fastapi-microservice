@@ -3,7 +3,7 @@ import typing
 import fastapi
 import loguru
 
-from app.infra.database.events import dispose_db_connection, initialize_db_connection
+from app.infra.database.events_listens import dispose_db_connection, initialize_db_connection
 
 
 def execute_app_server_event_handler(backend_app: fastapi.FastAPI) -> typing.Any:

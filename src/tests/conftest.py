@@ -3,16 +3,10 @@ from typing import Generator
 import pytest
 from fastapi.testclient import TestClient
 
-from app.db.session import SessionLocal
-from main import app
-
-
-@pytest.fixture(scope="session")
-def db() -> Generator:
-    yield SessionLocal()
+from main import beer_app
 
 
 @pytest.fixture(scope="module")
 def client() -> Generator:
-    with TestClient(app) as c:
+    with TestClient(beer_app) as c:
         yield c
